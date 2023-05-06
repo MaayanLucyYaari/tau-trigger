@@ -27,4 +27,6 @@ def import_data(d=3,model='Xgb'):
         
   sig = pd.read_csv(sig_url)
   bg = pd.read_csv(bg_url,nrows=200000)
+  sig['signal']=int(1)
+  bg['signal']=int(0)
   return bg,sig
