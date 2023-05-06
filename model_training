@@ -128,7 +128,7 @@ def build_ResNet(d=3):
     return model
 
 
-def train_model(sig.bg,d=3,model='Xgb',normalize=True):
+def train_model(sig,bg,d=3,model='Xgb',normalize=True):
 
   df_tot=pd.concat([sig,bg],axis=0)
   
