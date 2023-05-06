@@ -1,9 +1,9 @@
 
-
+import pandas as pd
 def import_data(d=3,model='Xgb'):
   #d is the matrix dimension (=w=h) can be equal [3,5,9], model should be one of ['Xgb','MLP','ResNet']
   
-  if model='Xgb':
+  if model=='Xgb':
     if d==3:
       sig_url='https://cernbox.cern.ch/remote.php/dav/public-files/tCQYSTiBoIlrxdV/sig_bdtvars_3by3.csv'
       bg_url='https://cernbox.cern.ch/remote.php/dav/public-files/vxzcINZvUxgtzBy/bg_Xgb_vars_3by3.csv' 
