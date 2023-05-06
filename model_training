@@ -16,6 +16,8 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, MaxPool2D,Dense, Flatt
 from keras.callbacks import EarlyStopping
 from keras.models import Sequential
 from keras.models import Model
+from keras.utils.np_utils import to_categorical   
+
 
 
 class CNNTauTriggerDataset():
@@ -140,7 +142,7 @@ def train_model(sig,bg,d=3,model='Xgb',normalize=True):
   else:
     model_features=df_tot.columns[-2*d**2:]
     
-  df_tot=df_tot.dropna(subset=model_features+['signal'])
+  df_tot=df_tot.dropna(subset=model_features)
   unique_events=df_tot.drop_duplicates(subset=['signal','evtNumber'])
   unique_events=unique_events[['signal','evtNumber']]
 
