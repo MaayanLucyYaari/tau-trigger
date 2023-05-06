@@ -1,0 +1,52 @@
+#d=number of channels,w=width,h=height
+def get_cell_mapping(d, w, h):
+    cells = []
+    for depth in range(d):
+        layer_cells = []
+        for eta in range(w):
+            phi_cells = []
+            for phi in range(h):
+                phi_cells += ['C' + str(h * w * depth + w * eta + phi)]
+            layer_cells += [phi_cells]
+        cells += [layer_cells]
+    return cells
+
+
+def calc_tob_pt(row, shapes, d, w, h):
+    cells = get_cell_mapping(d, w, h)
+
+    E = []
+    for n in range(len(shapes)):
+        E_shape = 0
+        for depth in range(d):
+            for eta in range(w):
+                for phi in range(h):
+                    E_shape += row[cells[depth][eta][phi]] * shapes[n][depth][eta][phi]
+        E += [E_shape]
+    
+    return max(E)
+
+
+def calc_toc(sig, bg, vis_pt_col, tob_pt_col, bins, rate):
+    #find threshold for given rate
+    max_evt_pt = bg.groupby(['evtNumber']).max().sort_values(by=[tob_pt_col])
+    pt_thresh = max_evt_pt.iloc[int(rate*len(max_evt_pt))][tob_pt_col]
+
+    #get curve
+    sig['passed'] = sig.apply(lambda x: x[tob_pt_col] > pt_thresh, axis=1)
+    sig['bin'] = sig.apply(lambda x: np.digitize(x[vis_pt_col], bins), axis=1)
+    mse = sig.groupby(['bin']).std()['passed']/sig.groupby(['bin']).count()['passed']
+    rmse = np.sqrt(mse)
+    return sig.groupby(['bin']).mean()['passed'],rmse
+
+
+def get_dwh_collection(d, w, h):
+    shape_collection = []
+    square_d = 3
+    for i in range(w-square_d+1):
+        for j in range(h-square_d+1):
+            shp = np.zeros((w, h))
+            shp[i:i+square_d, j:j+square_d] = np.ones((square_d, square_d))
+            shape_collection += [[shp.tolist()] * 2]
+
+    return [shape_collection]
