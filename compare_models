@@ -118,6 +118,7 @@ for model,ax in[(models[0],ax1),(models[1],ax2),(models[2],ax3)]:
 #plt.savefig("Score_Dist"+'_'+str(d)+'by'+str(d)+".png", bbox_inches = 'tight')
 
 #plot TOC
+low_x_limit = 20
 high_x_limit = 50
 toc_bins =np.concatenate((np.arange(0, low_x_limit+2, 2),np.arange(low_x_limit+2, high_x_limit+2, 4)))
 rate = 20/100
