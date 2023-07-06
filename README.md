@@ -7,7 +7,7 @@ thus contributing to increasing the sensitivity of searches for new phenomena in
 
 ## Link to Paper:
 
-"[Comparing machine learning models for tau triggers]"https://doi.org/10.48550/arXiv.2306.06743
+"[Comparing machine learning models for tau triggers]""(https://doi.org/10.48550/arXiv.2306.06743)"
 
 ## Files:
 
