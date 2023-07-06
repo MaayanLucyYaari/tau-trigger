@@ -11,8 +11,9 @@ https://doi.org/10.48550/arXiv.2306.06743
 
 ### Files:
 
-import_data: import 3 different kinds of data structures of the same dataset
-model_training: training xgb, MLP & ResNet 
+import_data: import 3 different kinds of data structures of the same dataset.
+model_training: training xgb, MLP & ResNet. 
 compare_models: plot all models results including pT Efficiency measurement. 
 helpers: data preprocessing and efficiency measurment helper functions.  
+
 
